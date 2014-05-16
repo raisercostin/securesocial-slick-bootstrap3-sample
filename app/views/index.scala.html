@@ -1,0 +1,7 @@
+@(message: String, search:String)(implicit request: securesocial.core.RequestWithUser[play.api.mvc.AnyContent])
+
+@main(message,search){
+	Hi user @{request.user.get}
+}{
+}{
+}

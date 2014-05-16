@@ -1,0 +1,38 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+GET     /robots.txt              controllers.Assets.at(path="/public", file="robots.txt")
+GET     /humans.txt              controllers.Assets.at(path="/public", file="humans.txt")
+GET     /favicon.ico             controllers.Assets.at(path="/public", file="favicon.ico")
+
+GET     /	                      	controllers.MessageController.index
+GET     /assets/javascripts/routes  controllers.MessageController.javascriptRoutes()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+# GET     /content/*file               controllers.ProductionExternalAssets.at(path=controllers.MessageController.path, file)
+GET     /webjars/*file              controllers.WebJarAssets.at(file)
+GET		/results					controllers.MessageController.search
+GET		/search/:searchTerm			controllers.MessageController.search2(searchTerm)
+
+#securesocial.start
+# Login page
+GET     /login                      securesocial.controllers.LoginPage.login
+GET     /logout                     securesocial.controllers.LoginPage.logout
+# User Registration and password handling 
+GET     /signup                     securesocial.controllers.Registration.startSignUp
+POST    /signup                     securesocial.controllers.Registration.handleStartSignUp
+GET     /signup/:token              securesocial.controllers.Registration.signUp(token)
+POST    /signup/:token              securesocial.controllers.Registration.handleSignUp(token)
+GET     /reset                      securesocial.controllers.Registration.startResetPassword
+POST    /reset                      securesocial.controllers.Registration.handleStartResetPassword
+GET     /reset/:token               securesocial.controllers.Registration.resetPassword(token)
+POST    /reset/:token               securesocial.controllers.Registration.handleResetPassword(token)
+GET     /password                   securesocial.controllers.PasswordChange.page
+POST    /password                   securesocial.controllers.PasswordChange.handlePasswordChange
+# Providers entry points
+GET     /authenticate/:provider     securesocial.controllers.ProviderController.authenticate(provider)
+POST    /authenticate/:provider     securesocial.controllers.ProviderController.authenticateByPost(provider)
+GET     /not-authorized             securesocial.controllers.ProviderController.notAuthorized
+#securesocial.end
